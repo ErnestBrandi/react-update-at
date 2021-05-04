@@ -21,9 +21,13 @@ For instance take an event described by the following object
 ```
 
 You might want the component using this object to display the following labels : `upcoming`, `in progress`, `passed` depending on the current time.
-Unfortunatly the object discribing the event remaining the same the related component will not re-render unless you force it to.
+Unfortunatly the object describing the event remaining the same the related component will not re-render unless you force it to.
 
 This is where `react-update-at` comes handy. It let you simply wrap the component you wanna see updated with a `UpdateAt` component **OR** with a `withUpdateAt` function.
+
+## Example
+
+[![Edit react-update-at-demo](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-update-element-forked-r0bzp?fontsize=14&hidenavigation=1&theme=dark)
 
 ## Install
 
