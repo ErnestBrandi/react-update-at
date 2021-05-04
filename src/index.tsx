@@ -3,6 +3,7 @@ import React from "react";
 interface UpdateAtProps {
   dates: Date[];
   delay?: number;
+  [x: string]: any;
 }
 
 interface UpdateAtCompProps extends UpdateAtProps {
@@ -10,7 +11,6 @@ interface UpdateAtCompProps extends UpdateAtProps {
 }
 
 function useForceUpdate() {
-  console.log("update");
   const [, setValue] = React.useState(0);
   return () => setValue((value) => value + 1);
 }
@@ -25,15 +25,6 @@ const shouldProcessDates = (dates: Date[]) => {
     if (wouldUpdate(date)) return true;
   }
   return false;
-};
-
-interface Zboub {
-  content: React.ReactElement;
-}
-const UpdateAtWrapper = ({ content }: Zboub) => {
-  return (
-    <React.Fragment key="zboubi">{React.cloneElement(content)}</React.Fragment>
-  );
 };
 
 const UpdateAt = ({ dates, delay = 10, children }: UpdateAtCompProps) => {
@@ -65,10 +56,10 @@ const UpdateAt = ({ dates, delay = 10, children }: UpdateAtCompProps) => {
     };
   }, [dates]);
   // clone element so it can be updated
-  return <UpdateAtWrapper content={children} />;
+  return React.cloneElement(children);
 };
 
-const withUpdateAt = (Component: typeof React.Component) => ({
+const withUpdateAt = (Component: React.ElementType) => ({
   dates,
   delay,
   ...props
@@ -76,7 +67,7 @@ const withUpdateAt = (Component: typeof React.Component) => ({
   if (Component === undefined) {
     throw new Error(
       [
-        "You are calling withUpdateAt(props)(Component) with an undefined component.",
+        "You are calling withUpdateAt(Component) with an undefined component.",
         "You may have forgotten to import it."
       ].join("\n")
     );
