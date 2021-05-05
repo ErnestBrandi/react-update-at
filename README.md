@@ -1,6 +1,6 @@
 # react-update-at
 
-> React wrapper to re-render a component at a certain time
+> React wrapper to re-render component at a given times.
 
 [![NPM](https://img.shields.io/npm/v/react-update-at.svg)](https://www.npmjs.com/package/react-update-at) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
@@ -21,9 +21,9 @@ For instance take an event described by the following object
 ```
 
 You might want the component using this object to display the following labels : `upcoming`, `in progress`, `passed` depending on the current time.
-Unfortunatly the object describing the event remaining the same the related component will not re-render unless you force it to.
+Unfortunatly the object describing the event remaining the same, the related component will not re-render unless you force it to.
 
-This is where `react-update-at` comes handy. It let you simply wrap the component you wanna see updated with a `UpdateAt` component **OR** with a `withUpdateAt` function.
+This is where `react-update-at` comes handy. It lets you simply wrap the component you wanna see updated with a `UpdateAt` component **OR** with a `withUpdateAt` function.
 
 ## Example
 
@@ -39,7 +39,7 @@ yarn add react-update-at
 
 ## Usage
 
-With the `UpdateAt` component
+With the `UpdateAt` component.
 
 ```tsx
 import UpdateAt from "react-update-at";
@@ -58,12 +58,13 @@ const App = () => {
 };
 ```
 
-With the `withUpateAt` function
+With the `withUpateAt` function.
+Created elements will _always_ have access to the "update-at" features through their props.
 
 ```tsx
 import { withUpdateAt } from "react-update-at";
 
-const EventTimeLabel = ({ event }: Props) => {
+const EventTimeLabel = ({ event }) => {
   return <>{/* playing with dates */}</>;
 };
 
@@ -84,10 +85,10 @@ const App = () => {
 
 ## Options
 
-| props |          | default | type     |                                                                                                                                 |
-| ----- | -------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| dates | required |         | `Date[]` | When to trigger the re-render                                                                                                   |
-| delay | optional | 10(ms)  | `number` | Because wrapped components will usualy interact with dates, you can set a delay in order for that component to behave correctly |
+| props |          | default | type     |                                                                                                                                  |
+| ----- | -------- | ------- | -------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| dates | required |         | `Date[]` | When to trigger the re-render                                                                                                    |
+| delay | optional | 10(ms)  | `number` | Because wrapped components will usually interact with dates, you can set a delay in order for that component to behave correctly |
 
 ## License
 
