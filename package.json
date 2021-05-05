@@ -1,7 +1,7 @@
 {
   "name": "react-update-at",
   "version": "0.0.2",
-  "description": "Made with create-react-library",
+  "description": "React wrapper to re-render component at a given times.",
   "author": "Léo Tellier",
   "license": "MIT",
   "repository": "ErnestBrandi/react-update-at",
