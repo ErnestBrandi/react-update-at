@@ -1,6 +1,6 @@
 {
   "name": "react-update-at",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "React wrapper to re-render component at a given times.",
   "author": "Léo Tellier",
   "license": "MIT",
