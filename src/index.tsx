@@ -3,7 +3,7 @@ import React from "react";
 interface UpdateAtProps {
   dates: Date[];
   delay?: number;
-  [x: string]: any;
+  [x: string]: unknown;
 }
 
 interface UpdateAtCompProps extends UpdateAtProps {
@@ -27,13 +27,18 @@ const shouldProcessDates = (dates: Date[]) => {
   return false;
 };
 
-const UpdateAt = ({ dates, delay = 10, children }: UpdateAtCompProps) => {
+const UpdateAt = ({
+  dates,
+  delay = 10,
+  children
+}: UpdateAtCompProps): JSX.Element => {
+  // init hook
   const forceUpdate = useForceUpdate();
   // useEffect hook
   React.useEffect(() => {
     if (!dates || dates.length < 1) return;
 
-    let timeoutRefs: number[] = [];
+    const timeoutRefs: number[] = [];
     const timeoutFactory = () => {
       for (const date of dates) {
         if (wouldUpdate(date)) {
@@ -56,7 +61,7 @@ const UpdateAt = ({ dates, delay = 10, children }: UpdateAtCompProps) => {
         }
       }
     };
-  }, [dates]);
+  }, [dates, delay, forceUpdate]);
   // clone element so it can be updated
   return children ? (
     React.cloneElement(children)
@@ -65,25 +70,23 @@ const UpdateAt = ({ dates, delay = 10, children }: UpdateAtCompProps) => {
   );
 };
 
-const withUpdateAt = (Component: React.ElementType) => ({
-  dates,
-  delay,
-  ...props
-}: UpdateAtProps) => {
-  if (Component === undefined) {
-    throw new Error(
-      [
-        "You are calling withUpdateAt(Component) with an undefined component.",
-        "You may have forgotten to import it."
-      ].join("\n")
+const withUpdateAt =
+  (Component: React.ElementType): React.ElementType =>
+  ({ dates, delay, ...props }: UpdateAtProps): JSX.Element => {
+    if (Component === undefined) {
+      throw new Error(
+        [
+          "You are calling withUpdateAt(Component) with an undefined component.",
+          "You may have forgotten to import it."
+        ].join("\n")
+      );
+    }
+    return (
+      <UpdateAt dates={dates} delay={delay}>
+        <Component {...props} />
+      </UpdateAt>
     );
-  }
-  return (
-    <UpdateAt dates={dates} delay={delay}>
-      <Component {...props} />
-    </UpdateAt>
-  );
-};
+  };
 
 export { withUpdateAt };
 export default UpdateAt;
