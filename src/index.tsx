@@ -58,7 +58,11 @@ const UpdateAt = ({ dates, delay = 10, children }: UpdateAtCompProps) => {
     };
   }, [dates]);
   // clone element so it can be updated
-  return children ? React.cloneElement(children) : <></>;
+  return children ? (
+    React.cloneElement(children)
+  ) : (
+    <React.Fragment></React.Fragment>
+  );
 };
 
 const withUpdateAt = (Component: React.ElementType) => ({
