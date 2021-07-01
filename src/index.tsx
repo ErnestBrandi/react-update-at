@@ -31,6 +31,8 @@ const UpdateAt = ({ dates, delay = 10, children }: UpdateAtCompProps) => {
   const forceUpdate = useForceUpdate();
   // useEffect hook
   React.useEffect(() => {
+    if (!dates || dates.length < 1) return;
+
     let timeoutRefs: number[] = [];
     const timeoutFactory = () => {
       for (const date of dates) {
@@ -56,7 +58,7 @@ const UpdateAt = ({ dates, delay = 10, children }: UpdateAtCompProps) => {
     };
   }, [dates]);
   // clone element so it can be updated
-  return React.cloneElement(children);
+  return children ? React.cloneElement(children) : <></>;
 };
 
 const withUpdateAt = (Component: React.ElementType) => ({
